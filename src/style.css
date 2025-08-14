@@ -4,7 +4,7 @@
 /* Fonte CocoGothic */
 @font-face {
   font-family: 'CocoGothic';
-  src: url('./assets/fonts/CocoGothic-UltraLight_trial.ttf') format('truetype');
+  src: url('/Portfolio/assets/fonts/CocoGothic-UltraLight_trial.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 /* Fonte FontSprint */
 @font-face {
   font-family: 'FontSprint';
-  src: url('./assets/fonts/Fontspring-DEMO-commuterssans-extralight.otf') format('opentype');
+  src: url('/Portfolio/assets/fonts/Fontspring-DEMO-commuterssans-extralight.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
 }

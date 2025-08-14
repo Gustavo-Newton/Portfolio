@@ -1,5 +1,9 @@
 import type { FooterData } from '../types';
 import { DOMUtils } from '../utils/dom';
+import linkedinIcon from '../assets/images/icons/linkedin.png';
+import githubIcon from '../assets/images/icons/github.png';
+import emailIcon from '../assets/images/icons/email.png';
+import whatsappIcon from '../assets/images/icons/whatsapp.jpg';
 
 export class Footer {
   private element: HTMLElement;
@@ -38,7 +42,7 @@ export class Footer {
     const linkedinLink = DOMUtils.createElement('a', 'footer-social-icon', '');
     linkedinLink.setAttribute('href', '#');
     const linkedinImg = document.createElement('img');
-    linkedinImg.src = '/src/assets/images/icons/linkedin.png';
+    linkedinImg.src = linkedinIcon;
     linkedinImg.alt = 'LinkedIn';
     linkedinLink.appendChild(linkedinImg);
     
@@ -46,7 +50,7 @@ export class Footer {
     const githubLink = DOMUtils.createElement('a', 'footer-social-icon', '');
     githubLink.setAttribute('href', '#');
     const githubImg = document.createElement('img');
-    githubImg.src = '/src/assets/images/icons/github.png';
+    githubImg.src = githubIcon;
     githubImg.alt = 'GitHub';
     githubLink.appendChild(githubImg);
     
@@ -54,7 +58,7 @@ export class Footer {
     const emailLink = DOMUtils.createElement('a', 'footer-social-icon', '');
     emailLink.setAttribute('href', '#');
     const emailImg = document.createElement('img');
-    emailImg.src = '/src/assets/images/icons/email.png';
+    emailImg.src = emailIcon;
     emailImg.alt = 'Email';
     emailLink.appendChild(emailImg);
     
@@ -62,7 +66,7 @@ export class Footer {
     const whatsappLink = DOMUtils.createElement('a', 'footer-social-icon', '');
     whatsappLink.setAttribute('href', '#');
     const whatsappImg = document.createElement('img');
-    whatsappImg.src = '/src/assets/images/icons/whatsapp.jpg';
+    whatsappImg.src = whatsappIcon;
     whatsappImg.alt = 'WhatsApp';
     whatsappLink.appendChild(whatsappImg);
     

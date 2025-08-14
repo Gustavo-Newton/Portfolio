@@ -1,5 +1,14 @@
 import type { HeroData, AboutData, ProjectsData, ContactData, Project, SkillsData, Skill } from '../types';
 import { DOMUtils } from '../utils/dom';
+import checkmarkIcon from '../assets/images/icons/checkmark.png';
+import experienceIconPng from '../assets/images/icons/experience.png';
+import linkedinIcon from '../assets/images/icons/linkedin.png';
+import githubIcon from '../assets/images/icons/github.png';
+import emailIcon from '../assets/images/icons/email.png';
+import whatsappIcon from '../assets/images/icons/whatsapp.jpg';
+import connectPng from '../assets/images/pessoal/connect.png';
+import gustavoImg from '../assets/images/pessoal/gustavo.JPG';
+import newtonImg from '../assets/images/pessoal/newton.jfif';
 import './Home.css';
 
 export class Home {
@@ -38,7 +47,7 @@ export class Home {
         title: 'MSM Group',
         description: 'Projeto em andamento - Desenvolvimento de sistema web para a MSM Group.',
         icon: '🚀',
-        image: '/src/assets/images/pessoal/connect.png'
+         image: connectPng
       }
     ]
   };
@@ -111,14 +120,14 @@ export class Home {
     const gustavoCard = this.createPersonCard(
       'Gustavo Seberino da Silva',
       '32 anos, nascido em Florianópolis. Cursa Análise e Desenvolvimento de Sistemas (ADS) e é desenvolvedor front-end com foco em criar interfaces modernas e experiências digitais excepcionais.',
-      '/src/assets/images/pessoal/gustavo.JPG'
+      gustavoImg
     );
     
     // Newton
     const newtonCard = this.createPersonCard(
       'Newton Marques Coelho Neto',
       '31 anos, nascido no Rio de Janeiro. Desenvolvedor Full-Stack e analista de sistemas com especialização em C# e segurança da informação, com 6 anos de experiência em TI. Especialista em validação de identidade, análise antifraude e Big Data, com vasto conhecimento em C#, Java, JavaScript, Python e frameworks como MVC, AWS e Django.',
-      '/src/assets/images/pessoal/newton.jfif'
+      newtonImg
     );
     
     DOMUtils.appendChildren(aboutContainer, gustavoCard, newtonCard);
@@ -196,10 +205,10 @@ export class Home {
     const skillItem = DOMUtils.createElement('div', 'skill-item');
     
     // Ícone checkmark
-    const checkmarkIcon = document.createElement('img') as HTMLImageElement;
-    checkmarkIcon.src = '/src/assets/images/icons/checkmark.png';
-    checkmarkIcon.alt = 'Checkmark';
-    checkmarkIcon.className = 'skill-icon';
+    const checkIcon = document.createElement('img') as HTMLImageElement;
+    checkIcon.src = checkmarkIcon;
+    checkIcon.alt = 'Checkmark';
+    checkIcon.className = 'skill-icon';
     
     // Nome da skill
     const skillName = DOMUtils.createElement('span', 'skill-name', skill.name);
@@ -207,7 +216,7 @@ export class Home {
     // Nível da skill
     const skillLevel = DOMUtils.createElement('span', 'skill-level', `(${skill.level})`);
     
-    DOMUtils.appendChildren(skillItem, checkmarkIcon, skillName, skillLevel);
+    DOMUtils.appendChildren(skillItem, checkIcon, skillName, skillLevel);
     return skillItem;
   }
 
@@ -255,7 +264,7 @@ export class Home {
     const linkedinLink = DOMUtils.createElement('a', 'social-icon', '');
     linkedinLink.setAttribute('href', '#');
     const linkedinImg = document.createElement('img') as HTMLImageElement;
-    linkedinImg.src = '/src/assets/images/icons/linkedin.png';
+    linkedinImg.src = linkedinIcon;
     linkedinImg.alt = 'LinkedIn';
     linkedinLink.appendChild(linkedinImg);
     
@@ -263,7 +272,7 @@ export class Home {
     const githubLink = DOMUtils.createElement('a', 'social-icon', '');
     githubLink.setAttribute('href', '#');
     const githubImg = document.createElement('img') as HTMLImageElement;
-    githubImg.src = '/src/assets/images/icons/github.png';
+    githubImg.src = githubIcon;
     githubImg.alt = 'GitHub';
     githubLink.appendChild(githubImg);
     
@@ -271,7 +280,7 @@ export class Home {
     const emailLink = DOMUtils.createElement('a', 'social-icon', '');
     emailLink.setAttribute('href', '#');
     const emailImg = document.createElement('img') as HTMLImageElement;
-    emailImg.src = '/src/assets/images/icons/email.png';
+    emailImg.src = emailIcon;
     emailImg.alt = 'Email';
     emailLink.appendChild(emailImg);
     
@@ -279,7 +288,7 @@ export class Home {
     const whatsappLink = DOMUtils.createElement('a', 'social-icon', '');
     whatsappLink.setAttribute('href', '#');
     const whatsappImg = document.createElement('img') as HTMLImageElement;
-    whatsappImg.src = '/src/assets/images/icons/whatsapp.jpg';
+    whatsappImg.src = whatsappIcon;
     whatsappImg.alt = 'WhatsApp';
     whatsappLink.appendChild(whatsappImg);
     
@@ -334,7 +343,7 @@ export class Home {
     
     // Ícone de experiência
     const experienceIcon = document.createElement('img') as HTMLImageElement;
-    experienceIcon.src = '/src/assets/images/icons/experience.png';
+    experienceIcon.src = experienceIconPng;
     experienceIcon.alt = 'Projeto Validado';
     experienceIcon.className = 'project-experience-icon';
     
