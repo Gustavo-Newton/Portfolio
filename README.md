@@ -1,5 +1,99 @@
-# Vue 3 + TypeScript + Vite
+# Portfolio - Gustavo & Newton
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Portfolio pessoal desenvolvido em React com TypeScript, apresentando os trabalhos e experiências de Gustavo Seberino da Silva e Newton Marques Coelho Neto.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 🚀 Tecnologias Utilizadas
+
+- **React 18** - Biblioteca JavaScript para construção de interfaces
+- **TypeScript** - Superset do JavaScript com tipagem estática
+- **CSS3** - Estilização moderna com animações e responsividade
+- **HTML5** - Estrutura semântica
+
+## 📋 Pré-requisitos
+
+- Node.js (versão 14 ou superior)
+- npm ou yarn
+
+## 🛠️ Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/gustavo-newton/Portfolio.git
+cd Portfolio
+```
+
+2. Instale as dependências:
+```bash
+npm install
+```
+
+3. Execute o projeto:
+```bash
+npm start
+```
+
+4. Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/          # Componentes React reutilizáveis
+│   ├── Navbar.tsx      # Navegação principal
+│   ├── Footer.tsx      # Rodapé da aplicação
+│   ├── Navbar.css      # Estilos da navegação
+│   └── Footer.css      # Estilos do rodapé
+├── pages/              # Páginas da aplicação
+│   ├── Home.tsx        # Página principal
+│   └── Home.css        # Estilos da página principal
+├── types/              # Definições de tipos TypeScript
+│   └── index.ts        # Tipos compartilhados
+├── assets/             # Recursos estáticos
+│   └── images/         # Imagens e ícones
+├── App.tsx             # Componente principal
+├── index.tsx           # Ponto de entrada da aplicação
+└── style.css           # Estilos globais
+```
+
+## 🎨 Funcionalidades
+
+- **Design Responsivo** - Adaptável a diferentes tamanhos de tela
+- **Navegação Suave** - Scroll automático entre seções
+- **Animações CSS** - Efeitos visuais interativos
+- **Seções Principais**:
+  - Hero com apresentação
+  - Sobre com informações pessoais
+  - Experiências e habilidades
+  - Projetos desenvolvidos
+  - Informações de contato
+
+## 🚀 Scripts Disponíveis
+
+- `npm start` - Inicia o servidor de desenvolvimento
+- `npm build` - Cria a versão de produção
+- `npm test` - Executa os testes
+- `npm eject` - Ejeta a configuração do Create React App
+
+## 📱 Responsividade
+
+O projeto é totalmente responsivo e funciona perfeitamente em:
+- Desktop (1024px+)
+- Tablet (768px - 1023px)
+- Mobile (até 767px)
+
+## 🎯 Características Técnicas
+
+- **Componentes Funcionais** - Utilizando React Hooks
+- **TypeScript** - Tipagem estática para maior segurança
+- **CSS Modules** - Estilos encapsulados por componente
+- **Intersection Observer** - Animações baseadas em scroll
+- **Performance Otimizada** - Lazy loading e otimizações
+
+## 👥 Autores
+
+- **Gustavo Seberino da Silva** - Desenvolvedor Front-end
+- **Newton Marques Coelho Neto** - Desenvolvedor Full-Stack
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.

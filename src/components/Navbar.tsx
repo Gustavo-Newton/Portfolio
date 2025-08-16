@@ -1,43 +1,16 @@
+import React from 'react';
 import type { MenuItem } from '../types';
-import { DOMUtils } from '../utils/dom';
+import './Navbar.css';
 
-export class Navbar {
-  private element: HTMLElement;
-  private menuItems: MenuItem[] = [
+export const Navbar: React.FC = () => {
+  const menuItems: MenuItem[] = [
     { id: 1, text: 'Sobre', href: '#about' },
     { id: 2, text: 'Experiências', href: '#experiencias' },
     { id: 3, text: 'Projetos', href: '#projects' },
     { id: 4, text: 'Contato', href: '#contact' }
   ];
 
-  constructor() {
-    this.element = this.createNavbar();
-  }
-
-  private createNavbar(): HTMLElement {
-    const nav = DOMUtils.createElement('nav', 'navbar');
-    const ul = DOMUtils.createElement('ul');
-
-    // Criar itens do menu
-    this.menuItems.forEach(item => {
-      const li = DOMUtils.createElement('li');
-      const link = DOMUtils.createLink(item.href, item.text);
-      
-      // Adicionar event listener para navegação suave
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.scrollToSection(item.href);
-      });
-      
-      li.appendChild(link);
-      ul.appendChild(li);
-    });
-
-    nav.appendChild(ul);
-    return nav;
-  }
-
-  private scrollToSection(href: string): void {
+  const scrollToSection = (href: string) => {
     const targetId = href.substring(1); // Remove o #
     const targetSection = document.getElementById(targetId);
     
@@ -74,13 +47,24 @@ export class Navbar {
         }, 500); // Aguardar o scroll terminar
       }
     }
-  }
+  };
 
-  public render(): HTMLElement {
-    return this.element;
-  }
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    scrollToSection(href);
+  };
 
-  public mount(container: HTMLElement): void {
-    container.appendChild(this.element);
-  }
-}
+  return (
+    <nav className="navbar">
+      <ul>
+        {menuItems.map(item => (
+          <li key={item.id}>
+            <a href={item.href} onClick={(e) => handleClick(e, item.href)}>
+              {item.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};

@@ -1,40 +1,19 @@
 /* Home.css - Estilos específicos para a página Home */
 
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 2rem 0;
-  min-height: 30vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 /* Animações do Hero */
-.hero h1 {
+.section-hero .heading-hero {
   opacity: 0;
   animation: fadeInUp 1s ease-out forwards;
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(45deg, #213547, #747bff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-family: 'CocoGothic', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'CocoGothic', 'UnifrakturMaguntia', 'Orbitron', system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 100;
+  letter-spacing: 2px;
 }
 
-.hero p {
+.section-hero .text-lead {
   opacity: 0;
   animation: fadeInUp 1s ease-out 0.8s forwards;
-  font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto;
-  opacity: 0.8;
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #666666;
 }
 
 @keyframes fadeInUp {
@@ -48,89 +27,21 @@
   }
 }
 
-@keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Seções */
-section {
-  padding: 2rem 0;
-  margin: 1rem 0;
-}
-
-/* Seções mantêm o padding e margin específicos */
-
-/* Títulos das seções */
-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-
-/* Nomes dos cards de pessoa */
-.person-content h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #1a1a1a;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.5s forwards;
-}
-
-/* Sobre */
-.about {
-  text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  transition: all 0.3s ease;
-}
-
-.about:hover {
-  transform: translateY(-2px);
-}
-
-.about-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  margin-top: 2rem;
-}
-
+/* Estilos específicos para cards de pessoa */
 .person-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 2rem;
-  background: #ffffff;
   opacity: 0;
   animation: fadeInUp 1s ease-out 0.3s forwards;
-  border-radius: 16px;
-  border: 1px solid #e0e0e0;
 }
 
 .person-card:nth-child(2) {
   animation-delay: 0.6s;
 }
 
-.person-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
 .person-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
   border-color: #213547;
 }
 
@@ -175,165 +86,17 @@ section h2 {
   opacity: 0.7;
 }
 
-.person-content h2 {
-  margin-bottom: 1rem;
+.person-content {
+  flex: 1;
 }
 
-.person-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-  font-family: 'FontSprint', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  color: #666666;
+/* Estilos específicos para skills */
+.person-skills {
+  cursor: pointer;
 }
 
-/* Projetos */
-.projects {
-  padding: 2rem 0;
-}
-
-.projects-title-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-.projects-subtitle {
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 1.2rem;
-  color: #666666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.projects-main-title {
-  font-size: 2.5rem;
-  margin: 0;
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-
-.project-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-  width: 100%;
-  box-sizing: border-box;
-  justify-items: center;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.project-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #e0e0e0;
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 400px;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.project-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-}
-
-.project-image {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
-}
-
-.project-image:hover {
-  transform: scale(1.05);
-}
-
-.project-placeholder {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(45deg, #f5f5f5, #e8e8e8);
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed #646cff;
-}
-
-.project-placeholder span {
-  font-size: 4rem;
-  opacity: 0.7;
-}
-
-.project-title-with-icon {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  font-family: 'CocoGothic', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  color: #1a1a1a;
-}
-
-/* Regra mais específica para garantir que o ícone não seja afetado por outras regras */
-.project-title-with-icon .project-experience-icon {
-  width: 32px !important;
-  height: 32px !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
-  filter: brightness(0) !important;
-  display: inline-block !important;
-  margin: 0 !important;
-  flex-shrink: 0 !important;
-  max-width: 32px !important;
-  max-height: 32px !important;
-}
-
-.project-experience-icon {
-  width: 32px !important;
-  height: 32px !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
-  filter: brightness(0) !important;
-  display: inline-block !important;
-  margin: 0 !important;
-  flex-shrink: 0 !important;
-}
-
-.project-card p {
-  opacity: 0.8;
-  font-family: 'FontSprint', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #666666;
-}
-
-/* Skills */
-.skills {
-  text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
+.person-skills:hover {
+  border-color: #1a1a1a;
 }
 
 .skills-title-container {
@@ -345,51 +108,12 @@ section h2 {
 }
 
 .skills-subtitle {
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 1.2rem;
-  color: #666666;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .skills-main-title {
-  font-size: 2.5rem;
   margin: 0;
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-
-.skills-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  margin-top: 2rem;
-}
-
-.person-skills {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e0e0e0;
-  padding: 2rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.person-skills:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-color: #1a1a1a;
-}
-
-.person-skills h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  color: #1a1a1a;
 }
 
 .skills-list {
@@ -437,33 +161,95 @@ section h2 {
 }
 
 .skill-name {
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  color: #1a1a1a;
   flex: 1;
   text-align: left;
 }
 
 .skill-level {
-  font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  color: #666666;
   font-size: 0.9rem;
+  color: #666666;
 }
 
-/* Contato */
-.contact {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
+/* Estilos específicos para projetos */
+.projects-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
-.contact p {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-  font-family: 'FontSprint', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  color: #333333;
+.projects-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.projects-main-title {
+  margin: 0;
+}
+
+.project-list {
+  justify-items: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-card {
+  min-height: 400px;
+}
+
+.project-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.project-image {
+  transition: transform 0.3s ease;
+}
+
+.project-image:hover {
+  transform: scale(1.05);
+}
+
+.project-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(45deg, #f5f5f5, #e8e8e8);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #646cff;
+}
+
+.project-placeholder span {
+  font-size: 4rem;
+  opacity: 0.7;
+}
+
+.project-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-experience-icon {
+  width: 32px !important;
+  height: 32px !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  filter: brightness(0) !important;
+  display: inline-block !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
 }
 
 /* Ícones de Redes Sociais */
@@ -507,23 +293,6 @@ section h2 {
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-  
-  .hero p {
-    font-size: 1rem;
-  }
-  
-  .about-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .person-card {
-    padding: 1.5rem;
-  }
-  
   .photo-placeholder {
     width: 120px;
     height: 120px;
@@ -534,7 +303,6 @@ section h2 {
   }
   
   .project-list {
-    grid-template-columns: 1fr;
     gap: 0.5rem;
   }
   
@@ -554,26 +322,5 @@ section h2 {
   .social-icon img {
     width: 18px;
     height: 18px;
-  }
-  
-  .skills-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .person-skills {
-    padding: 1.5rem;
-  }
-  
-  .person-skills h3 {
-    font-size: 1.5rem;
-  }
-  
-  .skills-subtitle {
-    font-size: 1rem;
-  }
-  
-  .skills-main-title {
-    font-size: 2rem;
   }
 }

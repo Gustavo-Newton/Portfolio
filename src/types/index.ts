@@ -56,3 +56,10 @@ export interface SkillsData {
   skills: Skill[];
 }
 
+// Tipos específicos para React
+export interface SocialIcon {
+  href: string;
+  icon: string;
+  alt: string;
+}
+
