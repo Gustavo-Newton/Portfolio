@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import type { HeroData, AboutData, ProjectsData, ContactData, Project, SkillsData, Skill } from '../types';
-import { Section, Heading, Text, Card, Grid, Container } from '../components';
+import type { HeroData, AboutData, ProjectsData, Project, SkillsData, Skill } from '../types';
+import { Section, Heading, Text, Card, Grid, Container, ContactSection } from '../components';
 import checkmarkIcon from '../assets/images/icons/checkmark.png';
 import experienceIconPng from '../assets/images/icons/experience.png';
 import linkedinIcon from '../assets/images/icons/linkedin.png';
@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
   };
 
   const aboutData: AboutData = {
-    title: 'Sobre Nós',
+    title: 'Sobre Nosso Time',
     description: 'Somos Gustavo Seberino da Silva e Newton Marques Coelho Neto, apaixonados por tecnologia.'
   };
 
@@ -52,26 +52,13 @@ export const Home: React.FC = () => {
         title: 'MSM Group',
         description: 'Projeto em andamento - Desenvolvimento de sistema web para a MSM Group.',
         icon: '🚀',
-        image: connectPng
+        image: connectPng,
+        url: 'https://site-msm-group.web.app/'
       }
     ]
   };
 
-  const contactData: ContactData = {
-    title: 'Contato',
-    contacts: [
-      {
-        id: 1,
-        label: 'Gustavo',
-        value: 'gustavoseberino@gmail.com'
-      },
-      {
-        id: 2,
-        label: 'Newton',
-        value: 'newtoncoelho.neto@gmail.com'
-      }
-    ]
-  };
+  
 
   useEffect(() => {
     const setupAnimations = () => {
@@ -175,7 +162,16 @@ export const Home: React.FC = () => {
   );
 
   const createProjectCard = (project: Project) => (
-    <Card key={project.id} variant="elevated" className="project-card">
+    <Card
+      key={project.id}
+      variant="elevated"
+      className="project-card"
+      onClick={() => {
+        if (project.url) {
+          window.open(project.url, '_blank', 'noopener,noreferrer');
+        }
+      }}
+    >
       {project.image ? (
         <img
           src={project.image}
@@ -199,17 +195,7 @@ export const Home: React.FC = () => {
     </Card>
   );
 
-  const createContactCard = (contact: { id: number; label: string; value: string; icon: string }) => (
-    <Card key={contact.id} variant="elevated" className="contact-card">
-      <div className="contact-icon">
-        <span>{contact.icon}</span>
-      </div>
-      <div className="contact-info">
-        <Heading level={3} variant="card">{contact.label}</Heading>
-        <Text variant="body" className="contact-value">{contact.value}</Text>
-      </div>
-    </Card>
-  );
+  
 
   return (
     <main className="home">
@@ -223,7 +209,7 @@ export const Home: React.FC = () => {
       <Section variant="about" id="about" ref={aboutSectionRef}>
         <div className="about-title-container">
           <Text variant="small" as="span" className="about-subtitle">Sobre</Text>
-          <Heading level={2} variant="section" className="about-main-title">Nós</Heading>
+          <Heading level={2} variant="section" className="about-main-title">Nosso Time</Heading>
         </div>
         <Grid columns={2} gap="large" className="about-container">
           {createPersonCard(
@@ -265,88 +251,7 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Contact Section */}
-      <Section variant="contact" id="contact" ref={contactSectionRef}>
-        <div className="contact-title-container">
-          <Text variant="small" as="span" className="contact-subtitle">Entre em</Text>
-          <Heading level={2} variant="section" className="contact-main-title">{contactData.title}</Heading>
-        </div>
-        <Container maxWidth="lg">
-          <div className="contact-content">
-            <div className="contact-form-section">
-              <Card variant="elevated" className="contact-form-card">
-                <Heading level={3} variant="card">Envie uma mensagem</Heading>
-                <form className="contact-form">
-                  <div className="form-group">
-                    <label htmlFor="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="Seu e-mail" required />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phone">Telefone</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Seu telefone" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="message">Mensagem</label>
-                    <textarea id="message" name="message" placeholder="Sua mensagem" rows={5} required></textarea>
-                  </div>
-                  <button type="submit" className="submit-btn">Enviar Mensagem</button>
-                </form>
-              </Card>
-            </div>
-            
-            <div className="contact-social-section">
-              <div className="social-title-container">
-                <Text variant="small" as="span" className="social-subtitle">Redes</Text>
-                <Heading level={3} variant="card" className="social-main-title">Sociais</Heading>
-              </div>
-              <div className="social-contacts-list">
-                <div className="person-social-group">
-                  <h4 className="person-name">Gustavo</h4>
-                  <div className="social-links">
-                    <a href="#" className="social-link">
-                      <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
-                      <span className="social-link-text">LinkedIn</span>
-                    </a>
-                    <a href="#" className="social-link">
-                      <img src={emailIcon} alt="Email" className="social-link-icon" />
-                      <span className="social-link-text">Email</span>
-                    </a>
-                    <a href="#" className="social-link">
-                      <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
-                      <span className="social-link-text">WhatsApp</span>
-                    </a>
-                    <a href="#" className="social-link">
-                      <img src={githubIcon} alt="GitHub" className="social-link-icon" />
-                      <span className="social-link-text">GitHub</span>
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="person-social-group">
-                  <h4 className="person-name">Newton</h4>
-                  <div className="social-links">
-                    <a href="#" className="social-link">
-                      <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
-                      <span className="social-link-text">LinkedIn</span>
-                    </a>
-                    <a href="#" className="social-link">
-                      <img src={emailIcon} alt="Email" className="social-link-icon" />
-                      <span className="social-link-text">Email</span>
-                    </a>
-                    <a href="#" className="social-link">
-                      <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
-                      <span className="social-link-text">WhatsApp</span>
-                    </a>
-                    <a href="#" className="social-link">
-                      <img src={githubIcon} alt="GitHub" className="social-link-icon" />
-                      <span className="social-link-text">GitHub</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      <ContactSection id="contact" ref={contactSectionRef} />
     </main>
   );
 };

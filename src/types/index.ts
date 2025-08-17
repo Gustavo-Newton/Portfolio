@@ -26,6 +26,7 @@ export interface Project {
   description: string;
   icon: string;
   image?: string;
+  url?: string;
 }
 
 export interface ProjectsData {
