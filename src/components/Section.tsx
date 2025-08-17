@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface SectionProps {
   children: React.ReactNode;
@@ -8,13 +8,13 @@ interface SectionProps {
   className?: string;
 }
 
-export const Section: React.FC<SectionProps> = ({
+export const Section = forwardRef<HTMLElement, SectionProps>(({
   children,
   id,
   variant = 'default',
   padding = 'medium',
   className = ''
-}) => {
+}, ref) => {
   const baseClasses = 'section';
   const variantClasses = {
     default: 'section-default',
@@ -39,8 +39,8 @@ export const Section: React.FC<SectionProps> = ({
   ].filter(Boolean).join(' ');
 
   return (
-    <section id={id} className={classes}>
+    <section ref={ref} id={id} className={classes}>
       {children}
     </section>
   );
-};
+});

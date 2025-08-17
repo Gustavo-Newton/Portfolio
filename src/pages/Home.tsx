@@ -13,7 +13,10 @@ import newtonImg from '../assets/images/pessoal/newton.jfif';
 import './Home.css';
 
 export const Home: React.FC = () => {
-  const skillsContainerRef = useRef<HTMLDivElement>(null);
+  const skillsSectionRef = useRef<HTMLElement>(null);
+  const aboutSectionRef = useRef<HTMLElement>(null);
+  const projectsSectionRef = useRef<HTMLElement>(null);
+  const contactSectionRef = useRef<HTMLElement>(null);
 
   const heroData: HeroData = {
     title: 'Gustavo & Newton',
@@ -71,7 +74,7 @@ export const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    const setupSkillsAnimation = () => {
+    const setupAnimations = () => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -87,14 +90,24 @@ export const Home: React.FC = () => {
         rootMargin: '0px 0px -50px 0px'
       });
 
-      if (skillsContainerRef.current) {
-        observer.observe(skillsContainerRef.current);
+      // Observar seções
+      if (aboutSectionRef.current) {
+        observer.observe(aboutSectionRef.current);
+      }
+      if (skillsSectionRef.current) {
+        observer.observe(skillsSectionRef.current);
+      }
+      if (projectsSectionRef.current) {
+        observer.observe(projectsSectionRef.current);
+      }
+      if (contactSectionRef.current) {
+        observer.observe(contactSectionRef.current);
       }
 
       return () => observer.disconnect();
     };
 
-    setupSkillsAnimation();
+    setupAnimations();
   }, []);
 
   const createSkillItem = (skill: Skill) => (
@@ -186,6 +199,18 @@ export const Home: React.FC = () => {
     </Card>
   );
 
+  const createContactCard = (contact: { id: number; label: string; value: string; icon: string }) => (
+    <Card key={contact.id} variant="elevated" className="contact-card">
+      <div className="contact-icon">
+        <span>{contact.icon}</span>
+      </div>
+      <div className="contact-info">
+        <Heading level={3} variant="card">{contact.label}</Heading>
+        <Text variant="body" className="contact-value">{contact.value}</Text>
+      </div>
+    </Card>
+  );
+
   return (
     <main className="home">
       {/* Hero Section */}
@@ -195,8 +220,11 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* About Section */}
-      <Section variant="about" id="about">
-        <Heading level={2} variant="section">{aboutData.title}</Heading>
+      <Section variant="about" id="about" ref={aboutSectionRef}>
+        <div className="about-title-container">
+          <Text variant="small" as="span" className="about-subtitle">Sobre</Text>
+          <Heading level={2} variant="section" className="about-main-title">Nós</Heading>
+        </div>
         <Grid columns={2} gap="large" className="about-container">
           {createPersonCard(
             'Gustavo Seberino da Silva',
@@ -212,19 +240,19 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Skills Section */}
-      <Section variant="skills" id="experiencias">
+      <Section variant="skills" id="experiencias" ref={skillsSectionRef}>
         <div className="skills-title-container">
           <Text variant="small" as="span" className="skills-subtitle">Explore Nossas</Text>
           <Heading level={2} variant="section" className="skills-main-title">{skillsData.title}</Heading>
         </div>
-        <Grid columns={2} gap="large" className="skills-container" ref={skillsContainerRef}>
+        <Grid columns={2} gap="large" className="skills-container">
           {createPersonSkills('Gustavo', skillsData.skills)}
           {createPersonSkills('Newton', skillsData.skills)}
         </Grid>
       </Section>
 
       {/* Projects Section */}
-      <Section variant="projects" id="projects">
+      <Section variant="projects" id="projects" ref={projectsSectionRef}>
         <div className="projects-title-container">
           <Text variant="small" as="span" className="projects-subtitle">{projectsData.subtitle}</Text>
           <Heading level={2} variant="section" className="projects-main-title">{projectsData.title}</Heading>
@@ -237,11 +265,87 @@ export const Home: React.FC = () => {
       </Section>
 
       {/* Contact Section */}
-      <Section variant="contact" id="contact">
-        <Heading level={2} variant="section">{contactData.title}</Heading>
-        {contactData.contacts.map(contact => (
-          <Text key={contact.id} variant="body">{contact.label}: {contact.value}</Text>
-        ))}
+      <Section variant="contact" id="contact" ref={contactSectionRef}>
+        <div className="contact-title-container">
+          <Text variant="small" as="span" className="contact-subtitle">Entre em</Text>
+          <Heading level={2} variant="section" className="contact-main-title">{contactData.title}</Heading>
+        </div>
+        <Container maxWidth="lg">
+          <div className="contact-content">
+            <div className="contact-form-section">
+              <Card variant="elevated" className="contact-form-card">
+                <Heading level={3} variant="card">Envie uma mensagem</Heading>
+                <form className="contact-form">
+                  <div className="form-group">
+                    <label htmlFor="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Seu e-mail" required />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Telefone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Seu telefone" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="message">Mensagem</label>
+                    <textarea id="message" name="message" placeholder="Sua mensagem" rows={5} required></textarea>
+                  </div>
+                  <button type="submit" className="submit-btn">Enviar Mensagem</button>
+                </form>
+              </Card>
+            </div>
+            
+            <div className="contact-social-section">
+              <div className="social-title-container">
+                <Text variant="small" as="span" className="social-subtitle">Redes</Text>
+                <Heading level={3} variant="card" className="social-main-title">Sociais</Heading>
+              </div>
+              <div className="social-contacts-list">
+                <div className="person-social-group">
+                  <h4 className="person-name">Gustavo</h4>
+                  <div className="social-links">
+                    <a href="#" className="social-link">
+                      <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
+                      <span className="social-link-text">LinkedIn</span>
+                    </a>
+                    <a href="#" className="social-link">
+                      <img src={emailIcon} alt="Email" className="social-link-icon" />
+                      <span className="social-link-text">Email</span>
+                    </a>
+                    <a href="#" className="social-link">
+                      <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
+                      <span className="social-link-text">WhatsApp</span>
+                    </a>
+                    <a href="#" className="social-link">
+                      <img src={githubIcon} alt="GitHub" className="social-link-icon" />
+                      <span className="social-link-text">GitHub</span>
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="person-social-group">
+                  <h4 className="person-name">Newton</h4>
+                  <div className="social-links">
+                    <a href="#" className="social-link">
+                      <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
+                      <span className="social-link-text">LinkedIn</span>
+                    </a>
+                    <a href="#" className="social-link">
+                      <img src={emailIcon} alt="Email" className="social-link-icon" />
+                      <span className="social-link-text">Email</span>
+                    </a>
+                    <a href="#" className="social-link">
+                      <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
+                      <span className="social-link-text">WhatsApp</span>
+                    </a>
+                    <a href="#" className="social-link">
+                      <img src={githubIcon} alt="GitHub" className="social-link-icon" />
+                      <span className="social-link-text">GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
       </Section>
     </main>
   );

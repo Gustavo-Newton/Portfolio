@@ -29,21 +29,17 @@
 
 /* Estilos específicos para cards de pessoa */
 .person-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.3s forwards;
-}
-
-.person-card:nth-child(2) {
-  animation-delay: 0.6s;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .person-card:hover {
-  border-color: #213547;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: #000000;
 }
+
+
 
 .photo-container {
   position: relative;
@@ -52,9 +48,9 @@
   transition: transform 0.3s ease;
 }
 
-.photo-container:hover {
+/* .photo-container:hover {
   transform: scale(1.05);
-}
+} */
 
 .photo-container::before {
   content: '';
@@ -90,13 +86,94 @@
   flex: 1;
 }
 
+/* Animação para o título "Sobre" */
+.about-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.about-subtitle {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-main-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+  margin: 0;
+}
+
+.section-about.animate .about-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-about.animate .about-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.section-about.animate .about-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
 /* Estilos específicos para skills */
+.skills-title-container {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.skills-subtitle {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.skills-main-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.section-skills.animate .skills-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-skills.animate .skills-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.section-skills.animate .skills-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+
+
 .person-skills {
   cursor: pointer;
 }
 
 .person-skills:hover {
-  border-color: #1a1a1a;
+  border-color: #000000;
 }
 
 .skills-title-container {
@@ -133,21 +210,20 @@
   transition: all 0.6s ease-out;
 }
 
-.skills-container.animate .skill-item,
-.skill-item.animate {
+.section-skills.animate .skill-item {
   opacity: 1;
   transform: translateX(0);
 }
 
-.skills-container.animate .skill-item:nth-child(1) { transition-delay: 0.1s; }
-.skills-container.animate .skill-item:nth-child(2) { transition-delay: 0.2s; }
-.skills-container.animate .skill-item:nth-child(3) { transition-delay: 0.3s; }
-.skills-container.animate .skill-item:nth-child(4) { transition-delay: 0.4s; }
-.skills-container.animate .skill-item:nth-child(5) { transition-delay: 0.5s; }
-.skills-container.animate .skill-item:nth-child(6) { transition-delay: 0.6s; }
-.skills-container.animate .skill-item:nth-child(7) { transition-delay: 0.7s; }
-.skills-container.animate .skill-item:nth-child(8) { transition-delay: 0.8s; }
-.skills-container.animate .skill-item:nth-child(9) { transition-delay: 0.9s; }
+.section-skills.animate .skill-item:nth-child(1) { transition-delay: 0.1s; }
+.section-skills.animate .skill-item:nth-child(2) { transition-delay: 0.2s; }
+.section-skills.animate .skill-item:nth-child(3) { transition-delay: 0.3s; }
+.section-skills.animate .skill-item:nth-child(4) { transition-delay: 0.4s; }
+.section-skills.animate .skill-item:nth-child(5) { transition-delay: 0.5s; }
+.section-skills.animate .skill-item:nth-child(6) { transition-delay: 0.6s; }
+.section-skills.animate .skill-item:nth-child(7) { transition-delay: 0.7s; }
+.section-skills.animate .skill-item:nth-child(8) { transition-delay: 0.8s; }
+.section-skills.animate .skill-item:nth-child(9) { transition-delay: 0.9s; }
 
 .skill-item:last-child {
   border-bottom: none;
@@ -177,6 +253,56 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.projects-subtitle {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.projects-main-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.projects-container.animate .projects-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projects-container.animate .projects-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.projects-container.animate .projects-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+/* Adicionar classe para a seção de projetos */
+.section-projects.animate .projects-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-projects.animate .projects-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.section-projects.animate .projects-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
 }
 
 .projects-subtitle {
@@ -197,6 +323,14 @@
 
 .project-card {
   min-height: 400px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: #000000;
 }
 
 .project-card img {
@@ -291,8 +425,350 @@
   opacity: 1;
 }
 
+/* Estilos específicos para contato */
+.contact-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.contact-subtitle {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.contact-main-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.contact-container.animate .contact-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-container.animate .contact-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.contact-container.animate .contact-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+/* Adicionar classe para a seção de contato */
+.section-contact.animate .contact-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-contact.animate .contact-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.section-contact.animate .contact-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+.contact-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-main-title {
+  margin: 0;
+}
+
+
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "form social";
+  gap: 3rem;
+  align-items: start;
+}
+
+.contact-form-section {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-social-section {
+  grid-area: social;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+
+
+.social-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.social-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666666;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.social-main-title {
+  margin: 0;
+  color: #213547;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.section-contact.animate .social-title-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-contact.animate .social-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.section-contact.animate .social-main-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+
+
+.social-contacts-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.person-social-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.person-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #213547;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.person-name::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #000000;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.person-name:hover::after {
+  width: 100%;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  transform: translateX(5px);
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.social-link-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.social-link:hover .social-link-icon {
+  opacity: 1;
+}
+
+.social-link-text {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+
+
+/* Estilos do formulário de contato */
+.contact-form-card {
+  padding: 2rem;
+  min-height: 300px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-form-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: #000000;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #213547;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  background: linear-gradient(45deg, #213547, #747bff);
+  color: white;
+  border: 2px solid transparent;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border-color: #000000;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .contact-social-section {
+    order: -1;
+  }
+  
+  .social-contacts-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .social-links {
+    gap: 0.6rem;
+  }
+  
+  .social-link {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .social-link-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .social-link-text {
+    font-size: 0.9rem;
+  }
   .photo-placeholder {
     width: 120px;
     height: 120px;
@@ -322,5 +798,27 @@
   .social-icon img {
     width: 18px;
     height: 18px;
+  }
+  
+
+  
+  .contact-form-card {
+    padding: 1.5rem;
+    min-height: 350px;
+  }
+  
+  .contact-form {
+    gap: 1rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .submit-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
   }
 }

@@ -78,7 +78,7 @@ button {
   color: #213547;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #000000;
 }
 
 /* Scroll suave */
@@ -143,7 +143,7 @@ html {
 }
 
 .btn-secondary:hover {
-  border-color: #646cff;
+  border-color: #000000;
   background-color: #f0f0f0;
 }
 
@@ -346,7 +346,7 @@ html {
 
 .section-contact {
   text-align: center;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
