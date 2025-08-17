@@ -74,6 +74,32 @@ src/
 - `npm test` - Executa os testes
 - `npm eject` - Ejeta a configuração do Create React App
 
+## 🌐 Build e Deploy no GitHub Pages
+
+Siga os passos abaixo para gerar o build de produção, mover os arquivos para a pasta `docs/` e publicar no GitHub Pages.
+
+1. Gerar o build de produção:
+```bash
+npm run build
+```
+
+2. Mover os arquivos do build para `docs/`:
+
+Windows (PowerShell):
+```powershell
+Remove-Item -Recurse -Force .\docs\*
+Copy-Item -Recurse -Force .\build\* .\docs\
+```
+
+3. Committar e enviar para a branch `main`:
+```bash
+git add docs
+git commit -m "build: publica nova versão no GitHub Pages"
+git push origin main
+```
+
+4. No GitHub, verifique em Settings → Pages se a fonte está configurada para `main` com a pasta `/docs`.
+
 ## 📱 Responsividade
 
 O projeto é totalmente responsivo e funciona perfeitamente em:
