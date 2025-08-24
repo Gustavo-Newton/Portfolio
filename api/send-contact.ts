@@ -1,29 +1,44 @@
 export default async function handler(req: any, res: any) {
-  // --- Configurações CORS via env ---
+  // --- Configurações CORS via env + localhost em dev ---
   const allowedOrigins = (process.env.ALLOWED_CORS?.split(",") || []).map(o => o.trim());
+  const devOrigins = ["http://localhost:3000"];
   const origin = req.headers.origin || "";
 
-  // Bloqueia se origin não estiver na lista
-  if (!allowedOrigins.includes(origin)) {
+  const isAllowedOrigin = allowedOrigins.includes(origin) || devOrigins.includes(origin);
+
+  // Função helper pra setar headers CORS
+  const setCorsHeaders = () => {
+    if (isAllowedOrigin) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+    }
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Vary", "Origin");
+  };
+
+  // --- Preflight OPTIONS (sempre responde com CORS) ---
+  if (req.method === "OPTIONS") {
+    setCorsHeaders();
+    return res.status(200).end();
+  }
+
+  // --- Bloqueia se origem não estiver na lista ---
+  if (!isAllowedOrigin) {
     return res.status(403).json({ error: "Origin não permitido" });
   }
 
-  // Seta headers CORS
-  res.setHeader("Access-Control-Allow-Origin", origin);
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Vary", "Origin");
+  // --- Aplica CORS para requests válidos ---
+  setCorsHeaders();
 
-  // Preflight OPTIONS
-  if (req.method === "OPTIONS") return res.status(200).end();
-
-  // Bloqueia outros métodos que não sejam POST
+  // --- Bloqueia outros métodos que não sejam POST ---
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
+  // --- Campos do body ---
   const { nome = '', email, telefone = '', mensagem, tipo_contato = 'Contato - Portfólio' } = req.body || {};
   const mode = (req.query?.mode as string) || (req.body?.mode as string) || 'check';
   if (!email || !mensagem) return res.status(400).json({ error: 'Campos obrigatórios ausentes' });
 
+  // --- Limite mensal no Redis ---
   const tz = process.env.TIMEZONE || 'America/Sao_Paulo';
   const now = new Date();
   const ym = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit' }).format(now); // YYYY-MM
@@ -48,13 +63,11 @@ export default async function handler(req: any, res: any) {
   if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
 
   if (mode === 'check') {
-    // Apenas informa se pode enviar (status 200) ou 429 se limite
     if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
     return res.status(200).json({ canSend: true, count, limit });
   }
 
   if (mode === 'confirm') {
-    // Incrementa contador se ainda abaixo do limite
     if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
     await redisFetch(`/incr/${encodeURIComponent(key)}`, { method: 'POST' });
     return res.status(200).json({ ok: true, count: count + 1, limit });
@@ -62,5 +75,3 @@ export default async function handler(req: any, res: any) {
 
   return res.status(400).json({ error: 'Modo inválido' });
 }
-
-
