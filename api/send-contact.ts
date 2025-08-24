@@ -3,7 +3,7 @@ export default async function handler(req: any, res: any) {
   const allowedOrigins = (process.env.ALLOW_ORIGIN?.split(",") || []).map(o => o.trim());
   const origin = req.headers.origin || "";
 
-  const isAllowedOrigin = allowedOrigins.includes(origin)
+  const isAllowedOrigin = allowedOrigins.includes(origin);
 
   // Função helper pra setar headers CORS
   const setCorsHeaders = () => {
@@ -37,12 +37,33 @@ export default async function handler(req: any, res: any) {
   const mode = (req.query?.mode as string) || (req.body?.mode as string) || 'check';
   if (!email || !mensagem) return res.status(400).json({ error: 'Campos obrigatórios ausentes' });
 
+  // --- Função para calcular chave de ciclo ---
+  function getCycleKey(date: Date, tz = 'America/Sao_Paulo', resetDay = 26) {
+    const local = new Date(date.toLocaleString("en-US", { timeZone: tz }));
+
+    let year = local.getFullYear();
+    let month = local.getMonth(); // 0 = jan, 11 = dez
+    const day = local.getDate();
+
+    if (day < resetDay) {
+      month -= 1;
+      if (month < 0) {
+        month = 11;
+        year -= 1;
+      }
+    }
+
+    const monthStr = String(month + 1).padStart(2, "0");
+    return `${year}-${monthStr}-${String(resetDay).padStart(2, "0")}`;
+  }
+
   // --- Limite mensal no Redis ---
   const tz = process.env.TIMEZONE || 'America/Sao_Paulo';
-  const now = new Date();
-  const ym = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit' }).format(now); // YYYY-MM
-  const key = `emailjs:count:${ym}`;
-  const limit = parseInt(process.env.MONTHLY_LIMIT || '280', 10);
+  const resetDay = parseInt(process.env.RESET_DAY || "26", 10);
+  const cycle = getCycleKey(new Date(), tz, resetDay);
+
+  const key = `emailjs:count:${cycle}`;
+  const limit = parseInt(process.env.MONTHLY_LIMIT || '180', 10);
 
   const redisUrl = process.env.UPSTASH_REDIS_REST_URL as string;
   const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN as string;
@@ -59,17 +80,17 @@ export default async function handler(req: any, res: any) {
   const getJson = await getResp.json().catch(() => ({} as any));
   const count = Number((getJson as any)?.result || 0);
   if (Number.isNaN(count)) return res.status(429).json({ error: 'Erro de quota' });
-  if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
+  if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit, cycle });
 
   if (mode === 'check') {
-    if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
-    return res.status(200).json({ canSend: true, count, limit });
+    if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit, cycle });
+    return res.status(200).json({ canSend: true, count, limit, cycle });
   }
 
   if (mode === 'confirm') {
-    if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
+    if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit, cycle });
     await redisFetch(`/incr/${encodeURIComponent(key)}`, { method: 'POST' });
-    return res.status(200).json({ ok: true, count: count + 1, limit });
+    return res.status(200).json({ ok: true, count: count + 1, limit, cycle });
   }
 
   return res.status(400).json({ error: 'Modo inválido' });
