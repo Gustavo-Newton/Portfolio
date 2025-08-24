@@ -8,6 +8,7 @@ export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { nome = '', email, telefone = '', mensagem, tipo_contato = 'Contato - Portfólio' } = req.body || {};
+  const mode = (req.query?.mode as string) || (req.body?.mode as string) || 'check';
   if (!email || !mensagem) return res.status(400).json({ error: 'Campos obrigatórios ausentes' });
 
   const tz = process.env.TIMEZONE || 'America/Sao_Paulo';
@@ -33,48 +34,20 @@ export default async function handler(req: any, res: any) {
   if (Number.isNaN(count)) return res.status(429).json({ error: 'Erro de quota' });
   if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
 
-  // Reserva
-  await redisFetch(`/incr/${encodeURIComponent(key)}`, { method: 'POST' });
-
-  const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
-  const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
-  const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
-  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
-    await redisFetch(`/decr/${encodeURIComponent(key)}`, { method: 'POST' });
-    return res.status(500).json({ error: 'EmailJS não configurado', missing: {
-      EMAILJS_PUBLIC_KEY: !EMAILJS_PUBLIC_KEY,
-      EMAILJS_SERVICE_ID: !EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID: !EMAILJS_TEMPLATE_ID,
-    }});
+  if (mode === 'check') {
+    // Apenas informa se pode enviar (status 200) ou 429 se limite
+    if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
+    return res.status(200).json({ canSend: true, count, limit });
   }
 
-  const payload = {
-    service_id: EMAILJS_SERVICE_ID,
-    template_id: EMAILJS_TEMPLATE_ID,
-    user_id: EMAILJS_PUBLIC_KEY,
-    template_params: {
-      nome,
-      email,
-      telefone,
-      mensagem,
-      data_envio: now.toLocaleString('pt-BR', { timeZone: tz }),
-      tipo_contato,
-    },
-  };
-
-  const ej = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-
-  if (!ej.ok) {
-    const details = await ej.text().catch(() => '');
-    await redisFetch(`/decr/${encodeURIComponent(key)}`, { method: 'POST' }); // rollback
-    return res.status(502).json({ error: 'Falha ao enviar', status: ej.status, details });
+  if (mode === 'confirm') {
+    // Incrementa contador se ainda abaixo do limite
+    if (count >= limit) return res.status(429).json({ error: 'Limite mensal atingido', count, limit });
+    await redisFetch(`/incr/${encodeURIComponent(key)}`, { method: 'POST' });
+    return res.status(200).json({ ok: true, count: count + 1, limit });
   }
 
-  return res.status(200).json({ ok: true, count: count + 1, limit });
+  return res.status(400).json({ error: 'Modo inválido' });
 }
 
 
