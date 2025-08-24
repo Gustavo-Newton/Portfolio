@@ -1,10 +1,9 @@
 export default async function handler(req: any, res: any) {
   // --- Configurações CORS via env + localhost em dev ---
   const allowedOrigins = (process.env.ALLOWED_CORS?.split(",") || []).map(o => o.trim());
-  const devOrigins = ["http://localhost:3000"];
   const origin = req.headers.origin || "";
 
-  const isAllowedOrigin = allowedOrigins.includes(origin) || devOrigins.includes(origin);
+  const isAllowedOrigin = allowedOrigins.includes(origin)
 
   // Função helper pra setar headers CORS
   const setCorsHeaders = () => {
