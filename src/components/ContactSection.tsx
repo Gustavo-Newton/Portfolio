@@ -4,6 +4,7 @@ import { Container } from './Container';
 import { Card } from './Card';
 import { Heading } from './Heading';
 import { Text } from './Text';
+import './ContactSection.css';
 import { sendContactEmail } from '../services/email';
 import linkedinIcon from '../assets/images/icons/linkedin.png';
 import githubIcon from '../assets/images/icons/github.png';
