@@ -1,6 +1,6 @@
 export default async function handler(req: any, res: any) {
   // --- Configurações CORS via env + localhost em dev ---
-  const allowedOrigins = (process.env.ALLOWED_CORS?.split(",") || []).map(o => o.trim());
+  const allowedOrigins = (process.env.ALLOW_ORIGIN?.split(",") || []).map(o => o.trim());
   const origin = req.headers.origin || "";
 
   const isAllowedOrigin = allowedOrigins.includes(origin)
