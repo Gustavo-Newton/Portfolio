@@ -52,7 +52,8 @@ export const Home: React.FC = () => {
         title: 'MSM Group',
         description: 'Projeto em andamento - Desenvolvimento de sistema web para a MSM Group.',
         icon: '🚀',
-        image: connectPng
+        image: connectPng,
+        url: 'https://site-msm-group.web.app/'
       }
     ]
   };
@@ -94,6 +95,25 @@ export const Home: React.FC = () => {
     };
 
     setupAnimations();
+  }, []);
+
+  // Garantir que a página sempre vá ao topo quando recarregada
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Delay de 2 segundos e redirecionamento para a seção "Sobre Nós"
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (aboutSectionRef.current) {
+        aboutSectionRef.current.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const createSkillItem = (skill: Skill) => (
@@ -161,7 +181,16 @@ export const Home: React.FC = () => {
   );
 
   const createProjectCard = (project: Project) => (
-    <Card key={project.id} variant="elevated" className="project-card">
+    <Card
+      key={project.id}
+      variant="elevated"
+      className="project-card"
+      onClick={() => {
+        if (project.url) {
+          window.open(project.url, '_blank', 'noopener,noreferrer');
+        }
+      }}
+    >
       {project.image ? (
         <img
           src={project.image}
@@ -189,10 +218,15 @@ export const Home: React.FC = () => {
 
   return (
     <main className="home">
-      {/* Hero Section */}
-      <Section variant="hero">
+      {/* Intro Section */}
+      <Section variant="hero" className="intro-block">
         <Heading level={1} variant="hero">{heroData.title}</Heading>
         <Text variant="lead">{heroData.subtitle}</Text>
+        <img
+          src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+          alt="Portfólio de TI - Desenvolvimento Web"
+          className="intro-image"
+        />
       </Section>
 
       {/* About Section */}
