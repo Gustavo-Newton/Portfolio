@@ -1,8 +1,20 @@
 export default async function handler(req: any, res: any) {
-  const origin = process.env.ALLOW_ORIGIN || '*';
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // CORS config
+  let allowedOrigins = process.env.ALLOW_ORIGIN?.split(",") || [];
+
+  // Se não for produção, adiciona localhost manualmente
+  if (process.env.NODE_ENV !== "production") {
+    allowedOrigins.push("http://localhost:3000");
+  }
+
+  const origin = req.headers.origin || "";
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Vary", "Origin");
 
   if (req.method === 'OPTIONS') return res.status(204).send('');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
