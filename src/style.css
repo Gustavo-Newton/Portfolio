@@ -42,6 +42,11 @@ body {
   overflow-x: hidden;
 }
 
+/* Altura padrão da navbar (padding 1rem + linha) ~ 64px; ajuste fino se necessário */
+:root {
+  --navbar-height: 0px; /* será ajustado dinamicamente via JS */
+}
+
 /* Títulos - Poppins */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;

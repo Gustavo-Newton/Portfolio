@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
   };
 
   const aboutData: AboutData = {
-    title: 'Sobre Nosso Time',
+    title: 'Sobre Nós',
     description: 'Somos Gustavo Seberino da Silva e Newton Marques Coelho Neto, apaixonados por tecnologia.'
   };
 
@@ -52,8 +52,7 @@ export const Home: React.FC = () => {
         title: 'MSM Group',
         description: 'Projeto em andamento - Desenvolvimento de sistema web para a MSM Group.',
         icon: '🚀',
-        image: connectPng,
-        url: 'https://site-msm-group.web.app/'
+        image: connectPng
       }
     ]
   };
@@ -162,16 +161,7 @@ export const Home: React.FC = () => {
   );
 
   const createProjectCard = (project: Project) => (
-    <Card
-      key={project.id}
-      variant="elevated"
-      className="project-card"
-      onClick={() => {
-        if (project.url) {
-          window.open(project.url, '_blank', 'noopener,noreferrer');
-        }
-      }}
-    >
+    <Card key={project.id} variant="elevated" className="project-card">
       {project.image ? (
         <img
           src={project.image}
@@ -209,7 +199,7 @@ export const Home: React.FC = () => {
       <Section variant="about" id="about" ref={aboutSectionRef}>
         <div className="about-title-container">
           <Text variant="small" as="span" className="about-subtitle">Sobre</Text>
-          <Heading level={2} variant="section" className="about-main-title">Nosso Time</Heading>
+          <Heading level={2} variant="section" className="about-main-title">Nós</Heading>
         </div>
         <Grid columns={2} gap="large" className="about-container">
           {createPersonCard(

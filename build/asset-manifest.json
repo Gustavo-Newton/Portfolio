@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.e779b23d.css",
+    "main.js": "/Portfolio/static/js/main.b4a9d904.js",
+    "static/media/connect.png": "/Portfolio/static/media/connect.b29caa5da416c1af31d1.png",
+    "static/media/CocoGothic-Light_trial.ttf": "/Portfolio/static/media/CocoGothic-Light_trial.1e754564ff21c4426d82.ttf",
+    "static/media/gustavo.JPG": "/Portfolio/static/media/gustavo.222dd83e8fa48001360f.JPG",
+    "static/media/whatsapp.jpg": "/Portfolio/static/media/whatsapp.7ff3f4ff99ba113034be.jpg",
+    "static/media/newton.jfif": "/Portfolio/static/media/newton.cda6029c1df42322a9ff.jfif",
+    "static/media/email.png": "/Portfolio/static/media/email.761df3bc69bdc631bd2f.png",
+    "static/media/checkmark.png": "/Portfolio/static/media/checkmark.86728d9a224a2c7c95d4.png",
+    "static/media/linkedin.png": "/Portfolio/static/media/linkedin.032cf8a63be2f0f4d425.png",
+    "index.html": "/Portfolio/index.html",
+    "static/media/Fontspring-DEMO-commuterssans-extralight.otf": "/Portfolio/static/media/Fontspring-DEMO-commuterssans-extralight.31d6cfe0d16ae931b73c.otf",
+    "main.e779b23d.css.map": "/Portfolio/static/css/main.e779b23d.css.map",
+    "main.b4a9d904.js.map": "/Portfolio/static/js/main.b4a9d904.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e779b23d.css",
+    "static/js/main.b4a9d904.js"
+  ]
+}

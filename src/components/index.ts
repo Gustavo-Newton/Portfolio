@@ -8,3 +8,4 @@ export { Text } from './Text';
 export { Navbar } from './Navbar';
 export { Footer } from './Footer';
 export { ContactSection } from './ContactSection';
+export { PersonSkills } from './PersonSkills';
