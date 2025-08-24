@@ -36,10 +36,22 @@ export default async function handler(req: any, res: any) {
   // Reserva
   await redisFetch(`/incr/${encodeURIComponent(key)}`, { method: 'POST' });
 
+  const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+  const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) {
+    await redisFetch(`/decr/${encodeURIComponent(key)}`, { method: 'POST' });
+    return res.status(500).json({ error: 'EmailJS não configurado', missing: {
+      EMAILJS_PUBLIC_KEY: !EMAILJS_PUBLIC_KEY,
+      EMAILJS_SERVICE_ID: !EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID: !EMAILJS_TEMPLATE_ID,
+    }});
+  }
+
   const payload = {
-    service_id: process.env.EMAILJS_SERVICE_ID,
-    template_id: process.env.EMAILJS_TEMPLATE_ID,
-    user_id: process.env.EMAILJS_PUBLIC_KEY,
+    service_id: EMAILJS_SERVICE_ID,
+    template_id: EMAILJS_TEMPLATE_ID,
+    user_id: EMAILJS_PUBLIC_KEY,
     template_params: {
       nome,
       email,
@@ -57,8 +69,9 @@ export default async function handler(req: any, res: any) {
   });
 
   if (!ej.ok) {
+    const details = await ej.text().catch(() => '');
     await redisFetch(`/decr/${encodeURIComponent(key)}`, { method: 'POST' }); // rollback
-    return res.status(502).json({ error: 'Falha ao enviar' });
+    return res.status(502).json({ error: 'Falha ao enviar', status: ej.status, details });
   }
 
   return res.status(200).json({ ok: true, count: count + 1, limit });
