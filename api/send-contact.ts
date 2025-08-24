@@ -1,23 +1,24 @@
 export default async function handler(req: any, res: any) {
-  // CORS config
-  const allowedOrigins = (process.env.ALLOW_ORIGIN?.split(",") || []).map(o => o.trim());
-
+  // --- Configurações CORS via env ---
+  const allowedOrigins = (process.env.ALLOWED_CORS?.split(",") || []).map(o => o.trim());
   const origin = req.headers.origin || "";
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  } else {
-    // fallback: em dev pode liberar tudo
-    if (process.env.NODE_ENV !== "production") {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-    }
+
+  // Bloqueia se origin não estiver na lista
+  if (!allowedOrigins.includes(origin)) {
+    return res.status(403).json({ error: "Origin não permitido" });
   }
 
+  // Seta headers CORS
+  res.setHeader("Access-Control-Allow-Origin", origin);
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Vary", "Origin");
 
-  if (req.method === 'OPTIONS') return res.status(204).send('');
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  // Preflight OPTIONS
+  if (req.method === "OPTIONS") return res.status(200).end();
+
+  // Bloqueia outros métodos que não sejam POST
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const { nome = '', email, telefone = '', mensagem, tipo_contato = 'Contato - Portfólio' } = req.body || {};
   const mode = (req.query?.mode as string) || (req.body?.mode as string) || 'check';
