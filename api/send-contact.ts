@@ -1,15 +1,15 @@
 export default async function handler(req: any, res: any) {
   // CORS config
-  let allowedOrigins = process.env.ALLOW_ORIGIN?.split(",") || [];
-
-  // Se não for produção, adiciona localhost manualmente
-  if (process.env.NODE_ENV !== "production") {
-    allowedOrigins.push("http://localhost:3000");
-  }
+  const allowedOrigins = (process.env.ALLOW_ORIGIN?.split(",") || []).map(o => o.trim());
 
   const origin = req.headers.origin || "";
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    // fallback: em dev pode liberar tudo
+    if (process.env.NODE_ENV !== "production") {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    }
   }
 
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
