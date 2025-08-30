@@ -9,3 +9,4 @@ export { Navbar } from './Navbar';
 export { Footer } from './Footer';
 export { ContactSection } from './ContactSection';
 export { PersonSkills } from './PersonSkills';
+export { EmailModal } from './EmailModal';

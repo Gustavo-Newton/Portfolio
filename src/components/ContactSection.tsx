@@ -4,6 +4,7 @@ import { Container } from './Container';
 import { Card } from './Card';
 import { Heading } from './Heading';
 import { Text } from './Text';
+import { EmailModal } from './EmailModal';
 import './ContactSection.css';
 import { sendContactEmail } from '../services/email';
 import linkedinIcon from '../assets/images/icons/linkedin.png';
@@ -21,6 +22,13 @@ interface ContactSectionProps {
 export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ id, className = '' }, ref) => {
   const [isSending, setIsSending] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [emailModal, setEmailModal] = useState<{
+    isOpen: boolean;
+    email: string;
+  }>({
+    isOpen: false,
+    email: ''
+  });
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSend = async () => {
@@ -54,6 +62,13 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ id
     } finally {
       setIsSending(false);
     }
+  };
+
+  const handleEmailClick = (personName: string) => {
+    const email = personName === 'Gustavo' 
+      ? 'gustavoseberino@gmail.com' 
+      : 'newtoncoelho.neto@gmail.com';
+    setEmailModal({ isOpen: true, email });
   };
   return (
     <Section variant="contact" id={id} ref={ref} className={className}>
@@ -105,10 +120,13 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ id
                     <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
                     <span className="social-link-text">LinkedIn</span>
                   </a>
-                  <a href="#" className="social-link">
+                  <button 
+                    className="social-link" 
+                    onClick={() => handleEmailClick('Gustavo')}
+                  >
                     <img src={emailIcon} alt="Email" className="social-link-icon" />
                     <span className="social-link-text">Email</span>
-                  </a>
+                  </button>
                   <a href="#" className="social-link">
                     <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
                     <span className="social-link-text">WhatsApp</span>
@@ -128,10 +146,13 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ id
                     <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
                     <span className="social-link-text">LinkedIn</span>
                   </a>
-                  <a href="#" className="social-link">
+                  <button 
+                    className="social-link" 
+                    onClick={() => handleEmailClick('Newton')}
+                  >
                     <img src={emailIcon} alt="Email" className="social-link-icon" />
                     <span className="social-link-text">Email</span>
-                  </a>
+                  </button>
                   <a href="#" className="social-link">
                     <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
                     <span className="social-link-text">WhatsApp</span>
@@ -146,6 +167,13 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ id
           </div>
         </div>
       </Container>
+
+      {/* Modal de Email */}
+      <EmailModal
+        isOpen={emailModal.isOpen}
+        onClose={() => setEmailModal({ isOpen: false, email: '' })}
+        email={emailModal.email}
+      />
     </Section>
   );
 });

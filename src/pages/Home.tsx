@@ -1,12 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { HeroData, AboutData, ProjectsData, Project, SkillsData, Skill } from '../types';
-import { Section, Heading, Text, Card, Grid, Container, ContactSection } from '../components';
+import { Section, Heading, Text, Card, Grid, Container, ContactSection, EmailModal } from '../components';
 import checkmarkIcon from '../assets/images/icons/checkmark.png';
 import experienceIconPng from '../assets/images/icons/experience.png';
 import linkedinIcon from '../assets/images/icons/linkedin.png';
 import githubIcon from '../assets/images/icons/github.png';
 import emailIcon from '../assets/images/icons/email.png';
 import whatsappIcon from '../assets/images/icons/whatsapp.jpg';
+import arrowIcon from '../assets/images/icons/arrow.png';
 import connectPng from '../assets/images/pessoal/connect.png';
 import gustavoImg from '../assets/images/pessoal/gustavo.JPG';
 import newtonImg from '../assets/images/pessoal/newton.jfif';
@@ -18,6 +19,97 @@ export const Home: React.FC = () => {
   const aboutSectionRef = useRef<HTMLElement>(null);
   const projectsSectionRef = useRef<HTMLElement>(null);
   const contactSectionRef = useRef<HTMLElement>(null);
+  
+  // Estado para controlar o modal de email
+  const [emailModal, setEmailModal] = useState<{
+    isOpen: boolean;
+    email: string;
+  }>({
+    isOpen: false,
+    email: ''
+  });
+
+  const scrollToAbout = () => {
+    if (aboutSectionRef.current) {
+      aboutSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  const scrollToSkills = () => {
+    if (skillsSectionRef.current) {
+      skillsSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  const scrollToProjects = () => {
+    if (projectsSectionRef.current) {
+      projectsSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  const scrollToContact = () => {
+    if (contactSectionRef.current) {
+      contactSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  // Função para navegar para a próxima seção baseada na posição atual do scroll
+  const scrollToNextSection = () => {
+    const sections = [
+      { id: 'gustavo-newton', ref: null as any, element: document.querySelector('.gustavo-newton-section') },
+      { id: 'about', ref: aboutSectionRef, element: document.querySelector('#about') },
+      { id: 'experiencias', ref: skillsSectionRef, element: document.querySelector('#experiencias') },
+      { id: 'projects', ref: projectsSectionRef, element: document.querySelector('#projects') },
+      { id: 'contact', ref: contactSectionRef, element: document.querySelector('#contact') }
+    ];
+
+    const scrollPosition = window.scrollY + window.innerHeight / 2; // Ponto médio da tela
+
+    // Encontrar a seção atual baseada na posição do scroll
+    let currentSectionIndex = -1;
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      if (section.element) {
+        const rect = section.element.getBoundingClientRect();
+        const sectionTop = rect.top + window.scrollY;
+        const sectionBottom = sectionTop + rect.height;
+        
+        if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+          currentSectionIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Se não encontrou seção atual, usar a primeira
+    if (currentSectionIndex === -1) {
+      currentSectionIndex = 0;
+    }
+
+    // Navegar para a próxima seção
+    const nextSectionIndex = currentSectionIndex + 1;
+    if (nextSectionIndex < sections.length) {
+      const nextSection = sections[nextSectionIndex];
+      if (nextSection.ref && nextSection.ref.current) {
+        nextSection.ref.current.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  };
 
   const heroData: HeroData = {
     title: 'Gustavo & Newton',
@@ -135,17 +227,17 @@ export const Home: React.FC = () => {
   );
 
   const createSocialIcons = (personName: string) => {
-    const socialIcons: Record<string, Array<{ href: string; icon: string; alt: string }>> = {
+    const socialIcons: Record<string, Array<{ href: string; icon: string; alt: string; isEmail?: boolean }>> = {
       'Gustavo Seberino da Silva': [
         { href: 'https://www.linkedin.com/in/gustavo-seberino-da-silva-902519338/', icon: linkedinIcon, alt: 'LinkedIn' },
         { href: 'https://github.com/sbes1', icon: githubIcon, alt: 'GitHub' },
-        { href: '#', icon: emailIcon, alt: 'Email' },
+        { href: '#', icon: emailIcon, alt: 'Email', isEmail: true },
         { href: '#', icon: whatsappIcon, alt: 'WhatsApp' }
       ],
       'Newton Marques Coelho Neto': [
         { href: 'https://www.linkedin.com/in/newton-coelho/', icon: linkedinIcon, alt: 'LinkedIn' },
         { href: 'https://github.com/Newtonk', icon: githubIcon, alt: 'GitHub' },
-        { href: '#', icon: emailIcon, alt: 'Email' },
+        { href: '#', icon: emailIcon, alt: 'Email', isEmail: true },
         { href: '#', icon: whatsappIcon, alt: 'WhatsApp' }
       ]
     };
@@ -153,16 +245,34 @@ export const Home: React.FC = () => {
     const icons = socialIcons[personName] || [
       { href: '#', icon: linkedinIcon, alt: 'LinkedIn' },
       { href: '#', icon: githubIcon, alt: 'GitHub' },
-      { href: '#', icon: emailIcon, alt: 'Email' },
+      { href: '#', icon: emailIcon, alt: 'Email', isEmail: true },
       { href: '#', icon: whatsappIcon, alt: 'WhatsApp' }
     ];
+
+    const handleEmailClick = (e: React.MouseEvent) => {
+      e.preventDefault();
+      const email = personName === 'Gustavo Seberino da Silva' 
+        ? 'gustavoseberino@gmail.com' 
+        : 'newtoncoelho.neto@gmail.com';
+      setEmailModal({ isOpen: true, email });
+    };
 
     return (
       <div className="social-icons">
         {icons.map((social, index) => (
-          <a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className="social-icon">
-            <img src={social.icon} alt={social.alt} />
-          </a>
+          social.isEmail ? (
+            <button
+              key={index}
+              onClick={handleEmailClick}
+              className="social-icon"
+            >
+              <img src={social.icon} alt={social.alt} />
+            </button>
+          ) : (
+            <a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className="social-icon">
+              <img src={social.icon} alt={social.alt} />
+            </a>
+          )
         ))}
       </div>
     );
@@ -240,15 +350,14 @@ export const Home: React.FC = () => {
           <Heading level={1} variant="hero" className="gustavo-newton-main-title">Gustavo & Newton</Heading>
           <Text variant="small" as="span" className="gustavo-newton-subtitle">Desenvolvedores Web focados em soluções modernas e eficientes.</Text>
         </div>
-      </Section>
+        <div className="intro-block">
+          <img
+            src={codigoImg}
+            alt="Portfólio de TI - Desenvolvimento Web"
+            className="intro-image"
+          />
 
-      {/* Intro Section */}
-      <Section variant="hero" padding="none" className="intro-block">
-        <img
-          src={codigoImg}
-          alt="Portfólio de TI - Desenvolvimento Web"
-          className="intro-image"
-        />
+        </div>
       </Section>
 
       {/* About Section */}
@@ -269,6 +378,7 @@ export const Home: React.FC = () => {
             newtonImg
           )}
         </Grid>
+
       </Section>
 
       {/* Skills Section */}
@@ -281,6 +391,7 @@ export const Home: React.FC = () => {
           {createPersonSkills('Gustavo', skillsData.skills)}
           {createPersonSkills('Newton', skillsData.skills)}
         </Grid>
+
       </Section>
 
       {/* Projects Section */}
@@ -294,10 +405,27 @@ export const Home: React.FC = () => {
             {projectsData.projects.map(createProjectCard)}
           </Grid>
         </Container>
+
       </Section>
 
       {/* Contact Section */}
       <ContactSection id="contact" ref={contactSectionRef} />
-    </main>
-  );
-};
+
+             {/* Seta fixa de navegação */}
+       <button 
+         className="fixed-scroll-arrow"
+         onClick={scrollToNextSection}
+         aria-label="Ir para próxima seção"
+       >
+         <img src={arrowIcon} alt="Seta para próxima seção" />
+       </button>
+
+       {/* Modal de Email */}
+       <EmailModal
+         isOpen={emailModal.isOpen}
+         onClose={() => setEmailModal({ isOpen: false, email: '' })}
+         email={emailModal.email}
+       />
+     </main>
+   );
+ };
