@@ -19,37 +19,82 @@
   align-items: center;
   overflow: hidden;
   position: relative;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 0;
 }
 
 .intro-block .intro-image {
   width: 100%;
-  height: 80%;
+  height: 100%;
   object-fit: cover;
   border-radius: 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   display: block;
-  margin-top: 1rem;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  animation: slideDown 2s ease-out 1.5s forwards;
 }
 
-/* Estilos originais do título e subtítulo do Hero */
-.section-hero .heading-hero {
+/* Seção Gustavo & Newton */
+.gustavo-newton-section {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  padding: 1rem 0;
+}
+
+.gustavo-newton-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.gustavo-newton-subtitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666666;
+  font-size: 0.9rem;
   opacity: 0;
-  animation: fadeInUp 0.6s ease-out forwards;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out 1s forwards;
+}
+
+.gustavo-newton-main-title {
+  font-family: 'CocoGothic', 'UnifrakturMaguntia', 'Orbitron', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  letter-spacing: 2px;
+  color: #213547;
+  font-size: 3rem;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+/* Estilos originais do título e subtítulo do Hero (mantidos para referência) */
+.section-hero .heading-hero {
   font-family: 'CocoGothic', 'UnifrakturMaguntia', 'Orbitron', system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 100;
   letter-spacing: 2px;
   margin: 0.65rem 0 0.2rem 0;
   font-size: 2.5em;
+  text-align: center;
+  color: #213547;
 }
 
 .section-hero .text-lead {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease-out 0.2s forwards;
   max-width: 580px;
   margin: 0 auto 0.75rem;
   font-size: 0.9em;
+  text-align: center;
+  color: #213547;
 }
 
 @keyframes fadeInUp {
@@ -59,6 +104,15 @@
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
     transform: translateY(0);
   }
 }
@@ -590,7 +644,7 @@
   }
   
   .home {
-    padding: 0 0.5rem;
+    padding: 0;
   }
   
   .social-icons {

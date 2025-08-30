@@ -10,6 +10,7 @@ import whatsappIcon from '../assets/images/icons/whatsapp.jpg';
 import connectPng from '../assets/images/pessoal/connect.png';
 import gustavoImg from '../assets/images/pessoal/gustavo.JPG';
 import newtonImg from '../assets/images/pessoal/newton.jfif';
+import codigoImg from '../assets/images/pessoal/codigo.jpg';
 import './Home.css';
 
 export const Home: React.FC = () => {
@@ -133,8 +134,23 @@ export const Home: React.FC = () => {
     </Card>
   );
 
-  const createSocialIcons = () => {
-    const socialIcons = [
+  const createSocialIcons = (personName: string) => {
+    const socialIcons: Record<string, Array<{ href: string; icon: string; alt: string }>> = {
+      'Gustavo Seberino da Silva': [
+        { href: 'https://www.linkedin.com/in/gustavo-seberino-da-silva-902519338/', icon: linkedinIcon, alt: 'LinkedIn' },
+        { href: 'https://github.com/sbes1', icon: githubIcon, alt: 'GitHub' },
+        { href: '#', icon: emailIcon, alt: 'Email' },
+        { href: '#', icon: whatsappIcon, alt: 'WhatsApp' }
+      ],
+      'Newton Marques Coelho Neto': [
+        { href: 'https://www.linkedin.com/in/newton-coelho/', icon: linkedinIcon, alt: 'LinkedIn' },
+        { href: 'https://github.com/Newtonk', icon: githubIcon, alt: 'GitHub' },
+        { href: '#', icon: emailIcon, alt: 'Email' },
+        { href: '#', icon: whatsappIcon, alt: 'WhatsApp' }
+      ]
+    };
+
+    const icons = socialIcons[personName] || [
       { href: '#', icon: linkedinIcon, alt: 'LinkedIn' },
       { href: '#', icon: githubIcon, alt: 'GitHub' },
       { href: '#', icon: emailIcon, alt: 'Email' },
@@ -143,8 +159,8 @@ export const Home: React.FC = () => {
 
     return (
       <div className="social-icons">
-        {socialIcons.map((social, index) => (
-          <a key={index} href={social.href} className="social-icon">
+        {icons.map((social, index) => (
+          <a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className="social-icon">
             <img src={social.icon} alt={social.alt} />
           </a>
         ))}
@@ -175,7 +191,7 @@ export const Home: React.FC = () => {
       <div className="person-content">
         <Heading level={2} variant="card">{name}</Heading>
         <Text variant="body">{description}</Text>
-        {createSocialIcons()}
+        {createSocialIcons(name)}
       </div>
     </Card>
   );
@@ -218,12 +234,18 @@ export const Home: React.FC = () => {
 
   return (
     <main className="home">
+      {/* Gustavo & Newton Section */}
+      <Section variant="hero" className="gustavo-newton-section">
+        <div className="gustavo-newton-title-container">
+          <Heading level={1} variant="hero" className="gustavo-newton-main-title">Gustavo & Newton</Heading>
+          <Text variant="small" as="span" className="gustavo-newton-subtitle">Desenvolvedores Web focados em soluções modernas e eficientes.</Text>
+        </div>
+      </Section>
+
       {/* Intro Section */}
-      <Section variant="hero" className="intro-block">
-        <Heading level={1} variant="hero">{heroData.title}</Heading>
-        <Text variant="lead">{heroData.subtitle}</Text>
+      <Section variant="hero" padding="none" className="intro-block">
         <img
-          src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
+          src={codigoImg}
           alt="Portfólio de TI - Desenvolvimento Web"
           className="intro-image"
         />
@@ -238,7 +260,7 @@ export const Home: React.FC = () => {
         <Grid columns={2} gap="large" className="about-container">
           {createPersonCard(
             'Gustavo Seberino da Silva',
-            '32 anos, nascido em Florianópolis. Cursa Análise e Desenvolvimento de Sistemas (ADS) e é desenvolvedor front-end com foco em criar interfaces modernas e experiências digitais excepcionais.',
+            'Desenvolvedor Front-End em formação, 32 anos, nascido em Florianópolis, cursando Análise e Desenvolvimento de Sistemas. Com o foco em React, TypeScript e CSS modularizado, criando interfaces modernas, responsivas e voltadas à melhor experiência do usuário. A união entre tecnologia e design resulta em soluções digitais intuitivas, modernas e de impacto.',
             gustavoImg
           )}
           {createPersonCard(
