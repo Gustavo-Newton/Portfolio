@@ -97,51 +97,51 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ id
               <Heading level={3} variant="card" className="social-main-title">Sociais</Heading>
             </div>
             <div className="social-contacts-list">
-                             <div className="person-social-group">
-                 <img src={gustavoImg} alt="Foto de Gustavo" className="person-avatar" />
-                 <h4 className="person-name">Gustavo</h4>
-                 <div className="social-links">
-                   <a href="https://www.linkedin.com/in/gustavo-seberino-da-silva-902519338/" target="_blank" rel="noopener noreferrer" className="social-link">
-                     <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
-                     <span className="social-link-text">LinkedIn</span>
-                   </a>
-                   <a href="#" className="social-link">
-                     <img src={emailIcon} alt="Email" className="social-link-icon" />
-                     <span className="social-link-text">Email</span>
-                   </a>
-                   <a href="#" className="social-link">
-                     <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
-                     <span className="social-link-text">WhatsApp</span>
-                   </a>
-                   <a href="https://github.com/sbes1" target="_blank" rel="noopener noreferrer" className="social-link">
-                     <img src={githubIcon} alt="GitHub" className="social-link-icon" />
-                     <span className="social-link-text">GitHub</span>
-                   </a>
-                 </div>
-               </div>
+              <div className="person-social-group">
+                <img src={gustavoImg} alt="Foto de Gustavo" className="person-avatar" />
+                <h4 className="person-name">Gustavo</h4>
+                <div className="social-links">
+                  <a href="#" className="social-link">
+                    <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
+                    <span className="social-link-text">LinkedIn</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <img src={emailIcon} alt="Email" className="social-link-icon" />
+                    <span className="social-link-text">Email</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
+                    <span className="social-link-text">WhatsApp</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <img src={githubIcon} alt="GitHub" className="social-link-icon" />
+                    <span className="social-link-text">GitHub</span>
+                  </a>
+                </div>
+              </div>
 
-                             <div className="person-social-group">
-                 <img src={newtonImg} alt="Foto de Newton" className="person-avatar" />
-                 <h4 className="person-name">Newton</h4>
-                 <div className="social-links">
-                   <a href="https://www.linkedin.com/in/newton-coelho/" target="_blank" rel="noopener noreferrer" className="social-link">
-                     <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
-                     <span className="social-link-text">LinkedIn</span>
-                   </a>
-                   <a href="#" className="social-link">
-                     <img src={emailIcon} alt="Email" className="social-link-icon" />
-                     <span className="social-link-text">Email</span>
-                   </a>
-                   <a href="#" className="social-link">
-                     <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
-                     <span className="social-link-text">WhatsApp</span>
-                   </a>
-                   <a href="https://github.com/Newtonk" target="_blank" rel="noopener noreferrer" className="social-link">
-                     <img src={githubIcon} alt="GitHub" className="social-link-icon" />
-                     <span className="social-link-text">GitHub</span>
-                   </a>
-                 </div>
-               </div>
+              <div className="person-social-group">
+                <img src={newtonImg} alt="Foto de Newton" className="person-avatar" />
+                <h4 className="person-name">Newton</h4>
+                <div className="social-links">
+                  <a href="#" className="social-link">
+                    <img src={linkedinIcon} alt="LinkedIn" className="social-link-icon" />
+                    <span className="social-link-text">LinkedIn</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <img src={emailIcon} alt="Email" className="social-link-icon" />
+                    <span className="social-link-text">Email</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <img src={whatsappIcon} alt="WhatsApp" className="social-link-icon" />
+                    <span className="social-link-text">WhatsApp</span>
+                  </a>
+                  <a href="#" className="social-link">
+                    <img src={githubIcon} alt="GitHub" className="social-link-icon" />
+                    <span className="social-link-text">GitHub</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
