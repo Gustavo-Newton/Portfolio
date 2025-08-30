@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.2954cea3.css",
-    "main.js": "/Portfolio/static/js/main.f10870a4.js",
+    "main.css": "/Portfolio/static/css/main.d272490a.css",
+    "main.js": "/Portfolio/static/js/main.ac642f5b.js",
+    "static/media/codigo.jpg": "/Portfolio/static/media/codigo.44a290a5fe36b55fada0.jpg",
     "static/media/connect.png": "/Portfolio/static/media/connect.b29caa5da416c1af31d1.png",
     "static/media/CocoGothic-Light_trial.ttf": "/Portfolio/static/media/CocoGothic-Light_trial.1e754564ff21c4426d82.ttf",
     "static/media/gustavo.JPG": "/Portfolio/static/media/gustavo.222dd83e8fa48001360f.JPG",
@@ -12,11 +13,11 @@
     "static/media/linkedin.png": "/Portfolio/static/media/linkedin.032cf8a63be2f0f4d425.png",
     "index.html": "/Portfolio/index.html",
     "static/media/Fontspring-DEMO-commuterssans-extralight.otf": "/Portfolio/static/media/Fontspring-DEMO-commuterssans-extralight.31d6cfe0d16ae931b73c.otf",
-    "main.2954cea3.css.map": "/Portfolio/static/css/main.2954cea3.css.map",
-    "main.f10870a4.js.map": "/Portfolio/static/js/main.f10870a4.js.map"
+    "main.d272490a.css.map": "/Portfolio/static/css/main.d272490a.css.map",
+    "main.ac642f5b.js.map": "/Portfolio/static/js/main.ac642f5b.js.map"
   },
   "entrypoints": [
-    "static/css/main.2954cea3.css",
-    "static/js/main.f10870a4.js"
+    "static/css/main.d272490a.css",
+    "static/js/main.ac642f5b.js"
   ]
 }
